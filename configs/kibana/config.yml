@@ -1,0 +1,8 @@
+server.name: kibana
+server.host: ${HOST}
+server.publicBaseUrl: ${KIBANA_HOST}
+monitoring.ui.container.elasticsearch.enabled: true
+
+elasticsearch.hosts: [ '${ELASTIC_HOST}' ]
+elasticsearch.username: ${ELASTIC_USERNAME}
+elasticsearch.password: ${ELASTIC_PASSWORD}

@@ -1,0 +1,5 @@
+cluster.name: 'elk'
+network.host: ${HOST}
+
+xpack.security.enabled: true
+xpack.license.self_generated.type: basic
