@@ -1,10 +1,13 @@
 # ELK
 
-## Установка через Docker (локально)
+## Install with Docker (local)
 
-1. Клонируйте репозиторий
+1. Clone repository
+```
+git clone https://github.com/xodiumx/elk.git
+```
 
-2. В главной директории создайте `.env` file, заполните все переменные с `<>`
+2. In main directory create `.env` file, fill in all the variables in `<>`
 
 ```
 # Main settings
@@ -37,11 +40,11 @@ PATH_TO_LOGS=<path_to_logs>
 NAME_LOGS=<logs_name>
 ```
 
-3. Выполните команду
+3. Use command
 ```
 docker-compose up -d
 ```
-4. Или
+4. Command for `mac-m1`
 ```
 docker-compose -f docker-compose-dev.yml up -d 
 ```
