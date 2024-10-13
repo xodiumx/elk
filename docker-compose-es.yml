@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+
+  elasticsearch:
+    image: elasticsearch:${ELASTIC_VERSION}
+    platform: linux/amd64
+    volumes:
+      - ./configs/elasticsearch/config.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./docker_volumes/elasticsearch/data:/var/lib/elasticsearch/data
+      - ./configs/locale/ru_RU:/usr/share/elasticsearch/config/hunspell/ru_RU/
+      - ./configs/locale/en_US:/usr/share/elasticsearch/config/hunspell/en_US/
+    environment:
+      ES_JAVA_OPTS: '-Xmx4g -Xms4g'
+      ELASTIC_USERNAME: ${ELASTIC_USERNAME}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      discovery.type: single-node
+    networks:
+      - elk
+    ports:
+      - ${ELASTIC_PORTS_1}:${ELASTIC_PORTS_1}
+      - ${ELASTIC_PORTS_2}:${ELASTIC_PORTS_2}
+    env_file:
+      - .env
+
+  kibana:
+    image: kibana:${ELASTIC_VERSION}
+    platform: linux/amd64
+    depends_on:
+      - elasticsearch
+    volumes:
+      - ./configs/kibana/config.yml:/usr/share/kibana/config/kibana.yml:ro
+    networks:
+      - elk
+    ports:
+      - ${KIBANA_PORTS}:${KIBANA_PORTS}
+    env_file:
+      - .env
+
+networks:
+  elk:
+    driver: bridge
